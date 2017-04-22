@@ -16,6 +16,5 @@ one of the following things prevent me from easily applying that knowledge to a 
 
 # license
 
-I haven't added a LICENSE yet, but I'll be adding an Apache one when I get a chance.
-My goal is to have simple starter code that's convenient to copy-paste when first adding
-some functionality into a new or existing application; feel free to do so
+MIT. Part of the purpose of this repo is to have a bunch of minimal running
+examples from which anyone can copy-paste code into new or existing applications.
