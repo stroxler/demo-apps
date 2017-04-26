@@ -20,7 +20,7 @@ I wound up writing two versions:
  - `tail_procs.py`, which is more complex because it uses
    `multiprocessing`, but as a result is fairly easy to 
 
-## Threading example
+## Threading example: `tail_threading.py`
 
 The code in `tail_threading.py` is pretty simple and mostly speaks
 for itself. I'm using `plumbum` to tail the log file and get a `Popen`
@@ -41,7 +41,7 @@ It *may* be possible to send an exception to this thread from the main thread
 using a more advanced interface, but I decided to use a multiprocessing
 solution to fix this.
 
-## Multiprocessing example
+## Multiprocessing example: `tail_procs.py`
 
 When we use `multiprocessing` and try to clean up after ourselves,
 things get a bit more complex.
@@ -64,3 +64,14 @@ Finally, to avoid a spurious traceback at runtime, we set a `SIGINT` handler in
 the `tail_to_queue` process; a `try/catch` for a `KeyboardInterrupt` would also
 have worked here. Note that we could easily add extra cleanup into our
 handler if we wanted to.
+
+## FileTailer demo: `file_tailer.py`
+
+In `file_tailer.py`, I use the ideas from `tail_procs.py` to create a
+class that acts as a context manager and handles both the tailing process
+and access to the `Queue` for inter-process messaging.
+
+There are no new threading/multiprocessing ideas here, but wrapping up
+both ends of the multiprocessing call in a context manager makes the
+client code much simpler, and helps ensure that we could use this approach
+in a large program without much risk of leaking child processes.
