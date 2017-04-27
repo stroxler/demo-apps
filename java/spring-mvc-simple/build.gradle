@@ -1,0 +1,65 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE"
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // spring boot
+    compile "org.springframework.boot:spring-boot:1.5.2.RELEASE"
+    compile "org.springframework.boot:spring-boot-autoconfigure:1.5.2.RELEASE"
+
+    // spring mvc, spring boot with jetty, and json support
+    compile "org.springframework.boot:spring-boot-starter-jetty:1.5.2.RELEASE"
+    compile "org.springframework:spring-webmvc:4.2.5.RELEASE"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.5.4"
+
+    // logging
+    compile "commons-logging:commons-logging:1.1.1"
+    compile "org.slf4j:slf4j-api:1.7.16"
+    compile "ch.qos.logback:logback-core:1.2.3"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+
+    // aspect-oriented logging
+    compile "org.aspectj:aspectjlib:1.6.2"
+    compile "org.aspectj:aspectjrt:1.8.6"
+    compile "org.springframework:spring-aspects:4.2.5.RELEASE"
+
+    // testing
+    testCompile "org.springframework.boot:spring-boot-starter-test:1.5.2.RELEASE"
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.0.0-M1"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:5.0.0-M1"
+    testCompile "org.codehaus.groovy:groovy-all:2.3.10"
+
+    // http client for testing
+    testCompile "org.apache.httpcomponents:httpclient:4.5.3"
+}
+
+
+mainClassName = "com.stroxler.Main"
+
+
+test {
+    afterTest { desc, result ->
+        println "[TEST] ${desc.name} [${desc.className}] ${result.resultType}"
+    }
+}
+
