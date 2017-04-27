@@ -1,4 +1,4 @@
-# gradle-spring-jdbc
+# spring-jdbc-simple
 
 This is a simple Spring app showing how to set up JdbcTemplate support for
 SQL queries. Along the way I also demonstrate using AspectJ to log around
